@@ -1,0 +1,16 @@
+﻿@model IEnumerable<HTTP_5212_Passion_Project_RX_V2.Models.PrescriptionDrugDto>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+@foreach (var pd in Model)
+{
+    <h2>@pd.PatientName</h2>
+    <div>@pd.DoctorName</div>
+    <div>@pd.DrugName</div>
+    <div>@pd.Qty</div>
+   
+
+}
+

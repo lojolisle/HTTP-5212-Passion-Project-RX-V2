@@ -1,0 +1,13 @@
+﻿@model IEnumerable<HTTP_5212_Passion_Project_RX_V2.Models.Drug>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+@foreach(var drug in Model)
+{
+  <h2>@drug.DrugName</h2>
+  <div>Formulation: @drug.Formulation</div>
+  <div>Dosage: @drug.Dosage</div>
+}
+

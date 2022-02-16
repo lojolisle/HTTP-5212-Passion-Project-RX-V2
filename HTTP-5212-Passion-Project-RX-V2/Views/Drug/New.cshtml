@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create a New Drug</h2>
+<form  action="/drug/create" method="POST">
+    <div>
+        <label>Name:</label> <input type="text" name="drugName" />
+        <label>Dosage:</label> <input type="text" name="dosage" />
+        <label>Formulation:</label> <input type="number" name="Formulation" />
+    </div>
+    <div>
+        <input type="submit" value="Add Drug"/>
+    </div>
+</form>
+

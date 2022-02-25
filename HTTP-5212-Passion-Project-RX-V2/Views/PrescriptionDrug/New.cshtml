@@ -1,0 +1,60 @@
+﻿@model HTTP_5212_Passion_Project_RX_V2.Models.ViewModels.CreateNew
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>Add a New Prescription Drug</h2>
+
+<form action="/prescriptionDrug/create" method="POST">
+    <div>
+        <label>Patient Name:  </label>
+
+        <select name="PrescriptionID">
+            @foreach (var p in Model.PrescriptionDetails)
+            {
+                <option value="@p.ID">@p.PatientFullName</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label>Doctors Name: </label>
+        <select name="dName">
+            @foreach (var doctorNames in Model.DoctorNames)
+            {
+                //string selected = "";
+                <option>@doctorNames.DoctorName</option>
+
+            }
+        </select>
+    </div>
+    <hr />
+    <div>
+        <table>
+            <tr>
+                <th>Drug</th>
+                <th>Quantity</th>
+                <th>Direction</th>
+                <th>Repeat</th>
+                <th>Action</th>
+            </tr>
+            <tr>
+                <td>
+                    <select name="DrugID">
+                        @foreach (var drugNames in Model.DrugDetails)
+                        {
+                            //string selected = "";
+                            <option value="@drugNames.DrugID">@drugNames.DrugName</option>
+
+                        }
+                    </select>
+                </td>
+                <td><input type="text" name="Quantity" value="" /></td>
+                <td><input type="text" name="Sig" value="" /></td>
+                <td><input type="text" name="Repeat" value="" /></td>
+                <td><input type="submit" value="Add" /></td>
+            </tr>
+        </table>
+    </div>
+</form>
+<hr />
+

@@ -19,6 +19,7 @@ namespace HTTP_5212_Passion_Project_RX_V2
                 routeTemplate: "api/{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
         }
     }
 }

@@ -1,0 +1,41 @@
+﻿@model HTTP_5212_Passion_Project_RX_V2.Models.ViewModels.AllDetails
+@{
+    ViewBag.Title = "AllPrescDetails";
+}
+
+<div style="padding: 3px;">
+    <a href="/PrescriptionDrug/New">Add a New Drug to a Prescription</a>
+</div>
+
+<h2 style="text-decoration:underline; color:green">List of Patient Prescriptions</h2>
+<div>
+    @foreach (var prscr in Model.allPrescription)
+    {
+        <div>Show Details</div>
+        <h3>Patient: @prscr.PatientFirstName @prscr.PatientLastName</h3>
+        <h4>Doctor: @prscr.DoctorName</h4>
+
+        <table style="border: 1px dashed; width:100%;">
+            <tr>
+                <th style="border: 0.5px solid; padding-top: 12px; padding-bottom: 12px; text-align: left; background-color: #04AA6D; color: white; ">Drug Name</th>
+                <th style="border: 0.5px solid; padding-top: 12px; padding-bottom: 12px; text-align: left; background-color: #04AA6D; color: white;">Quantity</th>
+                <th style="border: 0.5px solid; padding-top: 12px; padding-bottom: 12px; text-align: left; background-color: #04AA6D; color: white;">Direction</th>
+                <th style="border: 0.5px solid; padding-top: 12px; padding-bottom: 12px; text-align: left; background-color: #04AA6D; color: white;">Repeat</th>
+            </tr>
+            @foreach (var dr in Model.allPrescriptionDrug)
+            {
+                if (dr.PrescriptionID == prscr.ID)
+                {
+                    <tr>
+                        <td style=" padding-top: 12px; padding-bottom: 12px; text-align: left; background-color: grey; color: white;">@dr.DrugName</td>
+                        <td style=" padding-top: 12px; padding-bottom: 12px; text-align: left; background-color: grey; color: white;">@dr.Quantity</td>
+                        <td style=" padding-top: 12px; padding-bottom: 12px; text-align: left; background-color: grey; color: white;">@dr.Sig</td>
+                        <td style=" padding-top: 12px; padding-bottom: 12px; text-align: left; background-color: grey; color: white;">@dr.Repeat</td>
+                    </tr>
+                }
+            }
+        </table>
+        <hr />
+    }
+</div>
+

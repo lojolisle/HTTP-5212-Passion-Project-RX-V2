@@ -17,32 +17,88 @@ namespace HTTP_5212_Passion_Project_RX_V2.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/DrugData
-        public IQueryable<DrugDto> GetDrugs()
+        /// <summary>
+        /// Returns all Drugs in the system.
+        /// </summary>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: all Drugs in the database
+        /// </returns>
+        /// <example>
+        /// </example>
+        // GET: api/DrugData/ListDrugs
+        [HttpGet]
+        [ResponseType(typeof(DrugDto))]
+        public IHttpActionResult ListDrugs()
         {
-            var drugs = from d in db.Drugs
-                select new DrugDto()
-                {
-                    DrugID = d.ID,
-                    DrugName = d.DrugName,
-                    Dosage = d.Dosage,
-                    Formulation = d.Formulation.ToString()
-                };
-            return drugs;
-        
+            List<Drug> Drugs = db.Drugs.ToList();
+            List<DrugDto> DrugDtos = new List<DrugDto>();
+
+            Drugs.ForEach(d => DrugDtos.Add(new DrugDto()
+            {
+                DrugID = d.ID,
+                DrugName = d.DrugName,
+                Dosage = d.Dosage,
+                Formulation = d.Formulation.ToString()
+
+            }));
+
+            return Ok(DrugDtos);
         }
 
-        // GET: api/DrugData/5
-        [ResponseType(typeof(Drug))]
-        public IHttpActionResult GetDrug(int id)
+        // GET: api/DrugData/GetAllDrugs
+        [ResponseType(typeof(DrugDto))]
+        [HttpGet]
+        public IHttpActionResult GetAllDrugs()
         {
-            Drug drug = db.Drugs.Find(id);
-            if (drug == null)
+
+            List<Drug> drugs = db.Drugs.ToList();
+            List<DrugDto> drugDetails = new List<DrugDto>();
+
+
+            drugs.ForEach(d => drugDetails.Add(new DrugDto()
+            {
+                DrugID = d.ID,
+                DrugName = d.DrugName
+            }));
+
+            return Ok(drugDetails);
+
+        }
+
+        /// <summary>
+        /// Returns a Drug mapping givrn ID in the system.
+        /// </summary>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: A drug in the system matching up to the Drug ID primary key
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <param name="id">The primary key of the Drug</param>
+        /// <example>
+        /// GET: api/DrugData/FindDrug/5
+        /// </example>
+        [ResponseType(typeof(DrugDto))]
+        [HttpGet]
+        public IHttpActionResult FindDrug(int id)
+        {
+            Drug Drug = db.Drugs.Find(id);
+            DrugDto DrugDto = new DrugDto()
+            {
+                DrugID = Drug.ID,
+                DrugName = Drug.DrugName,
+                Dosage = Drug.Dosage,
+                Formulation = Drug.Formulation.ToString(),
+                FormulationId = (int)Drug.Formulation
+                
+            };
+            if (Drug == null)
             {
                 return NotFound();
             }
 
-            return Ok(drug);
+            return Ok(DrugDto);
         }
 
         /// <summary>
@@ -58,34 +114,31 @@ namespace HTTP_5212_Passion_Project_RX_V2.Controllers
         /// POST: api/DrugData/updateDrug/5
         /// Drug Json Object
         /// </example>
-        [Route("api/DrugData/UpdateExistingDrug/{id}")]
+        [Route("api/DrugData/UpdateDrug/{id}")]
         [ResponseType(typeof(void))]
         [HttpPost]
-        public IHttpActionResult UpdateExistingDrug(int id, Drug drug)
+        public IHttpActionResult UpdateDrug(int id, Drug drug)
         {
-            Debug.WriteLine("In function");
+           
             if (!ModelState.IsValid)
             {
-                Debug.WriteLine("BAd request");
                 return BadRequest(ModelState);
             }
-            Debug.WriteLine(" given Drug id " + id + " drug.id = "+ drug.ID);
+
             if (id != drug.ID)
             {
-                Debug.WriteLine("No id ");
                 return BadRequest();
             }
 
             db.Entry(drug).State = EntityState.Modified;
-            Debug.WriteLine(" before try ");
+
             try
             {
-                Debug.WriteLine(" saving--- ");
                 db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
-                Debug.WriteLine("catch ");
+
                 if (!DrugExists(id))
                 {
                     return NotFound();
@@ -95,7 +148,7 @@ namespace HTTP_5212_Passion_Project_RX_V2.Controllers
                     throw;
                 }
             }
-            Debug.WriteLine(" status code ");
+
             return StatusCode(HttpStatusCode.NoContent);
         }
 
@@ -127,6 +180,8 @@ namespace HTTP_5212_Passion_Project_RX_V2.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = drug.ID }, drug);
         }
+
+
         /// <summary>
         /// Deletes a Drug from the system matching to the given Drug Id
         /// </summary>
@@ -157,79 +212,6 @@ namespace HTTP_5212_Passion_Project_RX_V2.Controllers
 
             return Ok(drug);
         }
-
-
-
-
-
-
-
-
-        // PUT: api/DrugData/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutDrug(int id, Drug drug)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != drug.ID)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(drug).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!DrugExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/DrugData
-        [ResponseType(typeof(Drug))]
-        public IHttpActionResult PostDrug(Drug drug)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Drugs.Add(drug);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = drug.ID }, drug);
-        }
-
-        // DELETE: api/DrugData/5
-       /* [ResponseType(typeof(Drug))]
-        public IHttpActionResult DeleteDrug(int id)
-        {
-            Drug drug = db.Drugs.Find(id);
-            if (drug == null)
-            {
-                return NotFound();
-            }
-
-            db.Drugs.Remove(drug);
-            db.SaveChanges();
-
-            return Ok(drug);
-        }*/
 
         protected override void Dispose(bool disposing)
         {

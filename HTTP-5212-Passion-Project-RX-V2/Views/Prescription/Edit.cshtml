@@ -1,0 +1,43 @@
+﻿@model HTTP_5212_Passion_Project_RX_V2.Models.PrescriptionDto
+@{
+    ViewBag.Title = "Edit Prescription";
+}
+
+
+<h2>Update Prescription</h2>
+<div>
+
+    <form action="/Prescription/Update/@Model.ID" method="POST">
+        <div style="display:none">
+            <input type="text" name="ID" value="@Model.ID" />
+        </div>
+        <div>
+            <label>Patient First Name : </label>
+            <input type="text" name="FirstName" value="@Model.PatientFirstName" />
+        </div>
+        <div>
+            <label>Patient Last Name : </label>
+            <input type="text" name="LastName" value="@Model.PatientLastName" />
+        </div>
+        <div>
+            <label>Doctor Name : </label>
+            <input type="text" name="DoctorName" value="@Model.DoctorName" />
+        </div>
+        <div style="display:none">
+            <label>Created Date : </label>
+            <input type="text" name="CreatedDate" value="@Model.CreatedDate" />
+        </div>
+        <div style="display:none">
+            <label>Status : </label>
+            <input type="text" name="Status" value="@Model.Status" />
+        </div>
+
+
+        <div>
+            <input type="submit" value="Update Prescription" />
+        </div>
+
+    </form>
+
+</div>
+

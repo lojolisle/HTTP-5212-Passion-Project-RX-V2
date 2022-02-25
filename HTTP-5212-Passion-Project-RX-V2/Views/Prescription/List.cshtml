@@ -1,0 +1,40 @@
+﻿@model IEnumerable<HTTP_5212_Passion_Project_RX_V2.Models.PrescriptionDto>
+@{
+    ViewBag.Title = "List";
+}
+
+<div>
+    <a href="/PrescriptionDrug/New">Add a new Prescription </a>
+</div>
+<h2>Prescription List (Doctor View) </h2>
+<div>
+    <table>
+        <tr>
+            <td>Patient Name </td>
+            <td>Doctor Name</td>
+            <td>Processed Status</td>
+            <td>Created Date</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        @foreach (var p in Model)
+        {
+           
+            <tr>
+                <td>@p.PatientFirstName  @p.PatientLastName</td>
+                <td>@p.DoctorName</td>
+                <td>@p.CreatedDate</td>
+                <td>@p.Status</td>
+                <td><a href="/PrescriptionDrug/Details/@p.ID">Add Drugs</a></td>
+                <td><a href="/Prescription/Edit/@p.ID">Update Patient Information</a></td>
+                <td><a href="/Prescription/DeleteConfirm/@p.ID">Delete Patient Details </a></td>
+            </tr> 
+            
+        }
+    </table>
+
+</div>
+
+

@@ -1,0 +1,85 @@
+﻿@model HTTP_5212_Passion_Project_RX_V2.Models.ViewModels.Details
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Prescription Details</h2>
+
+<a href="/Prescription/list">Go back to Prescription List</a>
+<br />
+
+<br />
+<a style="color:#ab2020;" href="/PrescriptionDrug/DeleteConfirm/@Model.selectedPrescriptionDrug">Delete</a>
+
+
+<div>Patient Name: @Model.selectedPrescription.PatientFirstName @Model.selectedPrescription.PatientLastName</div>
+<div>Doctor  Name: @Model.selectedPrescription.DoctorName</div>
+<hr />
+<div>
+    <table>
+        <tr>
+            <th>Drug</th>
+            <th>Quantity</th>
+            <th>Direction</th>
+            <th>Repeat</th>
+            <th>drugid</th>
+            <td>Action</td>
+        </tr>
+        @foreach (var drugs in Model.selectedPrescriptionDrug)
+        {
+            <tr>
+                <td><a href="/drug/Details/@drugs.DrugId">@drugs.DrugName</a></td>
+                <td>@drugs.Quantity</td>
+                <td>@drugs.Sig</td>
+                <td>@drugs.Repeat</td>
+                <td>@drugs.DrugId</td>
+                <td><a style="color:#ab2020;" href="/PrescriptionDrug/UnAssociateDrug/@drugs.PrescriptionID?DrugID=@drugs.DrugId">[x]</a></td>
+            </tr>
+        }
+    </table>
+    <hr />
+    <br />
+    <br />
+
+    <div>
+        <h2>Add a New Prescription Drug</h2>
+
+        <form action="/prescriptionDrug/create" method="POST">
+            <div style="display:none">
+                <input type="text" name="PrescriptionID" value="@Model.selectedPrescription.ID" />
+            </div>
+           
+            
+            <hr />
+            <div>
+                <table>
+                    <tr>
+                        <th>Drug</th>
+                        <th>Quantity</th>
+                        <th>Direction</th>
+                        <th>Repeat</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select name="DrugID">
+                                @foreach (var drugNames in Model.DrugDetails)
+                                {
+                                    //string selected = "";
+                                    <option value="@drugNames.DrugID">@drugNames.DrugName</option>
+
+                                }
+                            </select>
+                        </td>
+                        <td><input type="text" name="Quantity" value="" /></td>
+                        <td><input type="text" name="Sig" value="" /></td>
+                        <td><input type="text" name="Repeat" value="" /></td>
+                        <td><input type="submit" value="Add" /></td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+        <hr />
+    </div>
+</div>
+

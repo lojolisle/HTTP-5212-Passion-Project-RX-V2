@@ -1,0 +1,29 @@
+﻿@model HTTP_5212_Passion_Project_RX_V2.Models.DrugDto
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Update Drug</h2>
+<form action="/Drug/Update/@Model.DrugID" method="POST">
+    <div style="display:none">
+        <input type="text" name="DrugID" value="@Model.DrugID" />
+    </div>
+    <div>
+        <label>Name : </label>
+        <input type="text" name="DrugName" value="@Model.DrugName" />
+    </div>
+    <div>
+        <label>Dosage : </label>
+        <input type="text" name="Dosage" value="@Model.Dosage" />
+    </div>
+    <div>
+        <label>Formulation : </label>
+        <input type="text" name="Formulation" value="@Model.FormulationId" />
+    </div>
+    <div>
+        <input type="submit" value="Update Drug" />
+    </div>
+
+</form>
+

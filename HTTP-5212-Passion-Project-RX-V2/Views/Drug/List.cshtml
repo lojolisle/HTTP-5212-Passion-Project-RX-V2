@@ -3,12 +3,55 @@
     ViewBag.Title = "List";
 }
 
-<h2>Drug List</h2>
-@foreach(var drug in Model)
+<style>
+
+    .links {
+        color: gold;
+        padding: 20px;
+    }
+
+    .myMenu ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: darkgray;
+    }
+
+    li {
+        float: left;
+    }
+
+        li a {
+            display: block;
+            color: gold;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+            /* Change the link color to #111 (black) on hover */
+            li a:hover {
+                background-color: grey;
+                color: #000000;
+            }
+
+
+
+    footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+</style>
+
+
+<h2 class="heading">Drug List</h2>
+@foreach (var drug in Model)
 {
-  <h2><a href="/drug/Details/@drug.DrugID">@drug.DrugName</a></h2>
-  <div>Formulation: @drug.Formulation</div>
-  <div>ID: @drug.DrugID</div>
-  <div>Dosage: @drug.Dosage</div>
+    <h3><a href="/drug/Details/@drug.DrugID">@drug.DrugName</a></h3>
+    <div>Formulation: @drug.Formulation</div>
+    <div>ID: @drug.DrugID</div>
+    <div>Dosage: @drug.Dosage</div>
 }
 

@@ -2,16 +2,86 @@
 @{
     ViewBag.Title = "Create";
 }
+<style>
 
-<h2>Create a New Drug</h2>
-<form  action="/drug/create" method="POST">
+    .links {
+        color: gold;
+        padding: 20px;
+    }
+
+    .myMenu ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: darkgray;
+    }
+
+    li {
+        float: left;
+    }
+
+    li a {
+        display: block;
+        color: gold;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    /* Change the link color to #111 (black) on hover */
+    li a:hover {
+        background-color: grey;
+        color: #000000;
+    }
+
+    .myForm div {
+        padding: 6px;
+    }
+
+    .myForm label {
+        width: 137px;
+    }
+
+    .button {
+        font: bold 11px Arial;
+        text-decoration: none;
+        background-color: #EEEEEE;
+        color: #333333;
+        padding: 6px;
+        border-top: 1px solid #CCCCCC;
+        border-right: 1px solid #333333;
+        border-bottom: 1px solid #333333;
+        border-left: 1px solid #CCCCCC;
+    }
+
+
+    footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+</style>
+
+
+<div class="myMenu">
+    <ul>
+        <li><a href="/Prescription/PharmacyPrescriptionList"><span class="links">Back to List</span> </a></li>
+    </ul>
+</div>
+<h2 class="heading">Create a New Drug</h2>
+<form class="myForm" action="/drug/create" method="POST">
     <div>
-        <label>Name:</label> <input type="text" name="drugName" />
-        <label>Dosage:</label> <input type="text" name="dosage" />
+        <label>Name: </label> <input type="text" name="drugName" />
+    </div>
+    <div>
+        <label>Dosage: </label> <input type="text" name="dosage" />
+     </div>
+    <div>
         <label>Formulation:</label> <input type="number" name="Formulation" />
     </div>
     <div>
-        <input type="submit" value="Add Drug"/>
+        <input class="button" type="submit" value="Add Drug" />
     </div>
 </form>
 

@@ -4,11 +4,80 @@
     ViewBag.Title = "DeleteConfirm";
 }
 
-<h2>Are you sure you want to delete this drug?</h2>
-<a href="/Drug/List">Cancel</a>
+<style>
+    .heading {
+        padding: 10px;
+        text-align: center;
+    }
+
+
+    .links {
+        color: gold;
+        padding: 20px;
+    }
+
+    .myMenu ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: darkgray;
+    }
+
+    li {
+        float: left;
+    }
+
+        li a {
+            display: block;
+            color: gold;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        /* Change the link color  on hover */
+        li a:hover {
+            background-color: grey;
+            color: #000000;
+        }
+
+    footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+    .button {
+        font: bold 11px Arial;
+        text-decoration: none;
+        background-color: #EEEEEE;
+        color: #333333;
+        padding: 6px;
+        border-top: 1px solid #CCCCCC;
+        border-right: 1px solid #333333;
+        border-bottom: 1px solid #333333;
+        border-left: 1px solid #CCCCCC;
+    }
+    footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+</style>
+
+<div class="myMenu">
+    <ul>
+        <li><a href="/Prescription/PharmacyPrescriptionList"><span class="links">Back to List</span> </a></li>
+    </ul>
+</div>
+
+<h2 class="heading">Are you sure you want to delete this drug?</h2>
+<div>
+    <a class="button" href="/Drug/List">Cancel</a>
+</div>
 <h2>@Model.DrugName</h2>
 <div>Dosage: @Model.Dosage</div>
 <div>Formulation: @Model.Formulation</div>
 <form action="/Drug/Delete/@Model.DrugID" method="POST">
-    <input type="submit" value="Confirm Delete"/>
+    <input class="button" type="submit" value="Confirm Delete"/>
 </form>

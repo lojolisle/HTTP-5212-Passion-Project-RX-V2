@@ -2,8 +2,103 @@
 @{
     ViewBag.Title = "New";
 }
+<style>
 
-<h2>Add a New Prescription Drug</h2>
+    .heading {
+        padding: 10px;
+        text-align: center;
+    }
+
+    table {
+        border: 1px solid red;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    thead {
+        background-color: gold;
+        color: white;
+        font-size: 14px;
+        text-transform: uppercase;
+    }
+
+    thead th {
+        width: 25%;
+        color: black;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+    }
+
+    .c-bold {
+        background-color: gold;
+        font-weight: bold;
+        font-size: 18px;
+        color: darkblue;
+    }
+
+    .links {
+        color: gold;
+        padding: 20px;
+    }
+
+    .myMenu ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: darkgray;
+    }
+
+    li {
+        float: left;
+    }
+
+    li a {
+        display: block;
+        color: gold;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    /* Change the link color to #111 (black) on hover */
+    li a:hover {
+        background-color: grey;
+        color: #000000;
+    }
+
+    .button {
+        font: bold 11px Arial;
+        text-decoration: none;
+        background-color: #EEEEEE;
+        color: #333333;
+        padding: 3px 6px 3px 6px;
+        border-top: 1px solid #CCCCCC;
+        border-right: 1px solid #333333;
+        border-bottom: 1px solid #333333;
+        border-left: 1px solid #CCCCCC;
+    }
+
+    footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+</style>
+
+
+<div class="myMenu">
+    <ul>
+        <li><a href="/Prescription/List"><span class="links">Back to List</span> </a></li>
+        <li><a href="/Drug/New"><span class="links">Add New drug</span> </a></li>
+
+    </ul>
+
+</div>
+<h2 class="heading">Add a New Prescription Drug</h2>
 
 <form action="/prescriptionDrug/create" method="POST">
     <div>
@@ -15,7 +110,8 @@
                 <option value="@p.ID">@p.PatientFullName</option>
             }
         </select>
-    </div>
+    </div> <br />
+
     <div>
         <label>Doctors Name: </label>
         <select name="dName">
@@ -26,35 +122,41 @@
 
             }
         </select>
-    </div>
-    <hr />
+    </div><br />
+ 
     <div>
         <table>
-            <tr>
-                <th>Drug</th>
-                <th>Quantity</th>
-                <th>Direction</th>
-                <th>Repeat</th>
-                <th>Action</th>
-            </tr>
-            <tr>
-                <td>
-                    <select name="DrugID">
-                        @foreach (var drugNames in Model.DrugDetails)
-                        {
-                            //string selected = "";
-                            <option value="@drugNames.DrugID">@drugNames.DrugName</option>
+            <thead>
+                <tr>
+                    <th>Drug</th>
+                    <th>Quantity</th>
+                    <th>Direction</th>
+                    <th>Repeat</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <select name="DrugID">
+                            @foreach (var drugNames in Model.DrugDetails)
+                            {
+                                //string selected = "";
+                                <option value="@drugNames.DrugID">@drugNames.DrugName</option>
 
-                        }
-                    </select>
-                </td>
-                <td><input type="text" name="Quantity" value="" /></td>
-                <td><input type="text" name="Sig" value="" /></td>
-                <td><input type="text" name="Repeat" value="" /></td>
-                <td><input type="submit" value="Add" /></td>
-            </tr>
+                            }
+                        </select>
+                    </td>
+                    <td><input type="text" name="Quantity" value="" /></td>
+                    <td><input type="text" name="Sig" value="" /></td>
+                    <td><input type="text" name="Repeat" value="" /></td>
+                    <td><input class="button" type="submit" value="Add" /></td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </form>
+
+
 <hr />
 

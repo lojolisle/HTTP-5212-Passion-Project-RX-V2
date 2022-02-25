@@ -2,41 +2,134 @@
 @{
     ViewBag.Title = "PharmacyPrescriptionList";
 }
+<style>
 
-<div>
-    <a href="/Prescription/List">Doctor's Prescription List'</a>
+    .heading {
+        padding: 10px;
+        text-align: center;
+    }
+
+    table {
+        border: 1px solid red;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    thead {
+        background-color: #333;
+        color: white;
+        font-size: 14px;
+        text-transform: uppercase;
+    }
+
+        thead th {
+            width: 25%;
+        }
+
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+    }
+
+    .c-bold {
+        background-color: gold;
+        font-weight: bold;
+        font-size: 18px;
+        color: darkblue;
+    }
+
+    .links {
+        color: gold;
+        padding: 20px;
+    }
+
+    .myMenu ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: darkgray;
+    }
+
+    li {
+        float: left;
+    }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+            /* Change the link color to #111 (black) on hover */
+            li a:hover {
+                background-color: grey;
+                color: #000000;
+            }
+
+    .button {
+        font: bold 11px Arial;
+        text-decoration: none;
+        background-color: #EEEEEE;
+        color: #333333;
+        padding: 3px 6px 3px 6px;
+        border-top: 1px solid #CCCCCC;
+        border-right: 1px solid #333333;
+        border-bottom: 1px solid #333333;
+        border-left: 1px solid #CCCCCC;
+    }
+
+    footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+</style>
+
+<div class="myMenu">
+    <ul>
+        <li> <a href="/Prescription/List"><span class="links">Doctor's Prescription List</span></a></li>
+        <li><a href="/Drug/New"><span class="links">Add New Drug</span> </a></li>
+    </ul>
+
 </div>
 
-<h2>Pharmacy Prescription List</h2>
+
+<h2 class="heading">Pharmacy Prescription List for Processing</h2>
 
 <div>
     <table>
-        <tr>
-            <td>Patient Name </td>
-            <td>Doctor Name</td>
-            <td>Processed Status</td>
-            <td>Created Date</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-
-        @foreach (var p in Model)
-        {
-            if (!p.Status)
+        <thead>
+            <tr>
+                <td class="c-bold">Patient Name </td>
+                <td class="c-bold">Doctor Name</td>
+                <td class="c-bold">Created Date</td>
+                <td class="c-bold">Processed Status</td>
+                <td class="c-bold"></td>
+                <td class="c-bold"></td>
+                <td class="c-bold"></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model)
             {
-                <tr>
-                    <td>@p.PatientFirstName  @p.PatientLastName</td>
-                    <td>@p.DoctorName</td>
-                    <td>@p.CreatedDate</td>
-                    <td>@p.Status</td>
-                    <td><a href="/PrescriptionDrug/DetailsForPharmacy/@p.ID">View</a></td>
-                    <td><a href="/Prescription/Edit/@p.ID">Update Patient Information</a></td>
-                    <td><a href="/Prescription/DeleteConfirm/@p.ID">Delete Patient Information </a></td>
-                </tr>
+                if (!p.Status)
+                {
+                    <tr>
+                        <td>@p.PatientFirstName  @p.PatientLastName</td>
+                        <td>@p.DoctorName</td>
+                        <td>@p.CreatedDate</td>
+                        <td>@p.Status</td>
+                        <td><a class="button" href="/PrescriptionDrug/DetailsForPharmacy/@p.ID">View</a></td>
+                        <td><a class="button" href="/Prescription/Edit/@p.ID">Update Patient Information</a></td>
+                        <td><a class="button" href="/Prescription/DeleteConfirm/@p.ID">Delete Patient Information </a></td>
+                    </tr>
 
+                }
             }
-        }
+        </tbody>
     </table>
 
 </div>

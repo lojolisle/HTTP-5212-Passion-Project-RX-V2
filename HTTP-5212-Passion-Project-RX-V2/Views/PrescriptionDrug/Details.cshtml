@@ -3,46 +3,139 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Prescription Details</h2>
+<style>
 
-<a href="/Prescription/list">Go back to Prescription List</a>
-<br />
+    .heading {
+        padding: 10px;
+        text-align: center;
+    }
 
-<br />
-<a style="color:#ab2020;" href="/PrescriptionDrug/DeleteConfirm/@Model.selectedPrescriptionDrug">Delete</a>
+    table {
+        border: 1px solid red;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    thead {
+        background-color: gold;
+        color: white;
+        font-size: 14px;
+        text-transform: uppercase;
+    }
+
+    thead th {
+        width: 25%;
+        color: black;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+    }
+
+    .c-bold {
+        background-color: gold;
+        font-weight: bold;
+        font-size: 18px;
+        color: darkblue;
+    }
+
+    .links {
+        color: gold;
+        padding: 20px;
+    }
+
+    .myMenu ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: darkgray;
+    }
+
+    li {
+        float: left;
+    }
+
+    li a {
+        display: block;
+        color: gold;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    /* Change the link color to #111 (black) on hover */
+    li a:hover {
+        background-color: grey;
+        color: #000000;
+    }
+
+    .button {
+        font: bold 11px Arial;
+        text-decoration: none;
+        background-color: #EEEEEE;
+        color: #333333;
+        padding: 3px 6px 3px 6px;
+        border-top: 1px solid #CCCCCC;
+        border-right: 1px solid #333333;
+        border-bottom: 1px solid #333333;
+        border-left: 1px solid #CCCCCC;
+    }
+
+    footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+</style>
+
+<div class="myMenu">
+    <ul>
+        <li><a href="/Prescription/list"><span class="links">Go back to Prescription List</span></a></li>
+        <li><a href="/Drug/New"><span class="links">Add New Drug</span> </a></li>
+        <li><a href="/Prescription/New"><span class="links">Add New Prescription</span> </a></li>
+    </ul>
+</div>
 
 
-<div>Patient Name: @Model.selectedPrescription.PatientFirstName @Model.selectedPrescription.PatientLastName</div>
-<div>Doctor  Name: @Model.selectedPrescription.DoctorName</div>
+<h2 class="heading">Prescription Details</h2>
+
+<div><span style="font-weight:bold">Patient Name:</span> @Model.selectedPrescription.PatientFirstName @Model.selectedPrescription.PatientLastName</div>
+<div><span style="font-weight:bold">Doctor  Name:</span> @Model.selectedPrescription.DoctorName</div>
 <hr />
 <div>
     <table>
-        <tr>
-            <th>Drug</th>
-            <th>Quantity</th>
-            <th>Direction</th>
-            <th>Repeat</th>
-            <th>drugid</th>
-            <td>Action</td>
-        </tr>
-        @foreach (var drugs in Model.selectedPrescriptionDrug)
-        {
+        <thead>
             <tr>
-                <td><a href="/drug/Details/@drugs.DrugId">@drugs.DrugName</a></td>
-                <td>@drugs.Quantity</td>
-                <td>@drugs.Sig</td>
-                <td>@drugs.Repeat</td>
-                <td>@drugs.DrugId</td>
-                <td><a style="color:#ab2020;" href="/PrescriptionDrug/UnAssociateDrug/@drugs.PrescriptionID?DrugID=@drugs.DrugId">[x]</a></td>
+                <th>Drug</th>
+                <th>Quantity</th>
+                <th>Direction</th>
+                <th>Repeat</th>
+                <th>drugid</th>
+                <th>Action</th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (var drugs in Model.selectedPrescriptionDrug)
+            {
+                <tr>
+                    <td><a href="/drug/Details/@drugs.DrugId">@drugs.DrugName</a></td>
+                    <td>@drugs.Quantity</td>
+                    <td>@drugs.Sig</td>
+                    <td>@drugs.Repeat</td>
+                    <td>@drugs.DrugId</td>
+                    <td><a class="button" style="color:#ab2020;" href="/PrescriptionDrug/UnAssociateDrug/@drugs.PrescriptionID?DrugID=@drugs.DrugId">[x]</a></td>
+                </tr>
+            }
+        </tbody>
     </table>
     <hr />
     <br />
     <br />
 
     <div>
-        <h2>Add a New Prescription Drug</h2>
+        <h2 class="heading">Add a New Prescription Drug</h2>
 
         <form action="/prescriptionDrug/create" method="POST">
             <div style="display:none">
@@ -53,29 +146,35 @@
             <hr />
             <div>
                 <table>
-                    <tr>
-                        <th>Drug</th>
-                        <th>Quantity</th>
-                        <th>Direction</th>
-                        <th>Repeat</th>
-                        <th>Action</th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <select name="DrugID">
-                                @foreach (var drugNames in Model.DrugDetails)
-                                {
-                                    //string selected = "";
-                                    <option value="@drugNames.DrugID">@drugNames.DrugName</option>
+                    <thead>
+                        <tr>
+                            <th>Drug</th>
+                            <th>Quantity</th>
+                            <th>Direction</th>
+                            <th>Repeat</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                                }
-                            </select>
-                        </td>
-                        <td><input type="text" name="Quantity" value="" /></td>
-                        <td><input type="text" name="Sig" value="" /></td>
-                        <td><input type="text" name="Repeat" value="" /></td>
-                        <td><input type="submit" value="Add" /></td>
-                    </tr>
+
+                        <tr>
+                            <td>
+                                <select name="DrugID">
+                                    @foreach (var drugNames in Model.DrugDetails)
+                                    {
+                                        //string selected = "";
+                                        <option value="@drugNames.DrugID">@drugNames.DrugName</option>
+
+                                    }
+                                </select>
+                            </td>
+                            <td><input type="text" name="Quantity" value="" /></td>
+                            <td><input type="text" name="Sig" value="" /></td>
+                            <td><input type="text" name="Repeat" value="" /></td>
+                            <td><input type="submit" value="Add" /></td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </form>

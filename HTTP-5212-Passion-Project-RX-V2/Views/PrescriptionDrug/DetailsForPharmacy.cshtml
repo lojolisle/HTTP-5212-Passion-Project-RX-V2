@@ -3,13 +3,100 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Prescription Details</h2>
+<style>
 
-<a href="/Prescription/PharmacyPrescriptionList">Go back to Prescription List</a>
-<br />
+    .heading {
+        padding: 10px;
+        text-align: center;
+    }
 
-<br />
-<a style="color:#ab2020;" href="/PrescriptionDrug/DeleteConfirm/@Model.selectedPrescriptionDrug">Delete</a>
+    table {
+        border: 1px solid red;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    thead {
+        background-color: gold;
+        color: white;
+        font-size: 14px;
+        text-transform: uppercase;
+    }
+
+        thead th {
+            width: 25%;
+            color: black;
+        }
+
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+    }
+
+    .c-bold {
+        background-color: gold;
+        font-weight: bold;
+        font-size: 18px;
+        color: darkblue;
+    }
+
+    .links {
+        color: gold;
+        padding: 20px;
+    }
+
+    .myMenu ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: darkgray;
+    }
+
+    li {
+        float: left;
+    }
+
+    li a {
+        display: block;
+        color: gold;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    /* Change the link color to #111 (black) on hover */
+    li a:hover {
+        background-color: grey;
+        color: #000000;
+    }
+
+    .button {
+        font: bold 11px Arial;
+        text-decoration: none;
+        background-color: #EEEEEE;
+        color: #333333;
+        padding: 3px 6px 3px 6px;
+        border-top: 1px solid #CCCCCC;
+        border-right: 1px solid #333333;
+        border-bottom: 1px solid #333333;
+        border-left: 1px solid #CCCCCC;
+    }
+
+    footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+</style>
+
+<div class="myMenu">
+    <ul>
+        <li><a href="/Prescription/PharmacyPrescriptionList"><span class="links">Go back to Prescription List</span></a></li>
+        <li><a href="/Drug/New"><span class="links">Add New Drug</span> </a></li>
+    </ul>
+</div>
+<h2 class="heading">Prescription Details</h2>
 
 
 <div>Patient Name: @Model.selectedPrescription.PatientFirstName @Model.selectedPrescription.PatientLastName</div>
@@ -17,26 +104,27 @@
 <hr />
 <div>
     <table>
-        <tr>
-            <th>Drug</th>
-            <th>Quantity</th>
-            <th>Direction</th>
-            <th>Repeat</th>
-            <th>drugid</th>
-            <td>Action</td>
-        </tr>
-        @foreach (var drugs in Model.selectedPrescriptionDrug)
-        {
+        <thead>
             <tr>
-                <td><a href="/drug/Details/@drugs.DrugId">@drugs.DrugName</a></td>
-                <td>@drugs.Quantity</td>
-                <td>@drugs.Sig</td>
-                <td>@drugs.Repeat</td>
-                <td>@drugs.DrugId</td>
+                <th>Drug</th>
+                <th>Quantity</th>
+                <th>Direction</th>
+                <th>Repeat</th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (var drugs in Model.selectedPrescriptionDrug)
+            {
+                <tr>
+                    <td><a href="/drug/Details/@drugs.DrugId">@drugs.DrugName</a></td>
+                    <td>@drugs.Quantity</td>
+                    <td>@drugs.Sig</td>
+                    <td>@drugs.Repeat</td>
+                </tr>
+            }
+        </tbody>
     </table>
-    <hr />
+
     <br />
     <br />
 
@@ -58,10 +146,10 @@
                 <input type="text" name="Status" value="true" />
             </div>
             <div>
-                <input type="submit" value="Set Status to Processed" />
+                <input class="button" type="submit" value="Set Status to Processed" />
             </div>
         </form>
-        <hr />
+     
     </div>
 </div>
 

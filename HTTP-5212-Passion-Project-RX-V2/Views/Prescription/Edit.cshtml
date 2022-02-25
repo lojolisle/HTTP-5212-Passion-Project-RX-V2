@@ -4,10 +4,111 @@
 }
 
 
-<h2>Update Prescription</h2>
-<div>
+<style>
 
-    <form action="/Prescription/Update/@Model.ID" method="POST">
+    .heading {
+        padding: 10px;
+        text-align: center;
+    }
+
+    table {
+        border: 1px solid red;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    thead {
+        background-color: #333;
+        color: white;
+        font-size: 14px;
+        text-transform: uppercase;
+    }
+
+        thead th {
+            width: 25%;
+        }
+
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+    }
+
+    .c-bold {
+        background-color: gold;
+        font-weight: bold;
+        font-size: 18px;
+        color: darkblue;
+    }
+
+    .links {
+        color: gold;
+        padding: 20px;
+    }
+
+    .myMenu ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: darkgray;
+    }
+
+    li {
+        float: left;
+    }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+            /* Change the link color to #111 (black) on hover */
+            li a:hover {
+                background-color: grey;
+                color: #000000;
+            }
+
+    .button {
+        font: bold 11px Arial;
+        text-decoration: none;
+        background-color: #EEEEEE;
+        color: #333333;
+        padding: 6px;
+        border-top: 1px solid #CCCCCC;
+        border-right: 1px solid #333333;
+        border-bottom: 1px solid #333333;
+        border-left: 1px solid #CCCCCC;
+    }
+    .myForm div {
+        padding: 6px;
+    }
+
+    .myForm label {
+        width: 137px;
+    }
+
+    footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+</style>
+
+
+
+<div class="myMenu">
+    <ul>
+        <li><a href="/Prescription/list"><span class="links">Go back to Prescription List</span></a></li>
+        <li><a href="/Drug/New"><span class="links">Add New Drug</span> </a></li>
+    </ul>
+</div>
+
+<h2 class="heading">Update Prescription</h2>
+<div>
+    <form class="myForm" action="/Prescription/Update/@Model.ID" method="POST">
         <div style="display:none">
             <input type="text" name="ID" value="@Model.ID" />
         </div>
@@ -34,7 +135,7 @@
 
 
         <div>
-            <input type="submit" value="Update Prescription" />
+            <input class="button" type="submit" value="Update Prescription" />
         </div>
 
     </form>

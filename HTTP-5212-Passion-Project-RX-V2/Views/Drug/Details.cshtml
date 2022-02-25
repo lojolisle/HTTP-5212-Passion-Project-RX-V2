@@ -3,8 +3,64 @@
     ViewBag.Title = "View";
 }
 
-<a href="/Drug/List">Go Back to Drug List</a>
-<h2>@Model.DrugName</h2>
+<style>
+
+    .heading {
+        padding: 10px;
+        text-align: center;
+    }
+
+ 
+    .links {
+        color: gold;
+        padding: 20px;
+    }
+
+    .myMenu ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: darkgray;
+    }
+
+    li {
+        float: left;
+    }
+
+    li a {
+        display: block;
+        color: gold;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    /* Change the link color  on hover */
+    li a:hover {
+        background-color: grey;
+        color: #000000;
+    }
+
+    footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+</style>
+
+<div class="myMenu">
+    <ul>
+        <li><a href="/Drug/List"><span class="links">Back to Drug List</span></a></li>
+        <li><a href="/Prescription/List"><span class="links">Back to Prescription List</span></a></li>
+        <li><a href="/PrescriptionDrug/New"><span class="links">Add New Prescription</span></a></li>
+        <li><a href="/Drug/New"><span class="links">Add New Drug</span> </a></li>
+    </ul>
+
+</div>
+
+<h2 class="heading">Drug Details</h2>
+<h4>Drug Name: @Model.DrugName</h4>
 <div>Dosage: @Model.Dosage</div>
 <div>Formulation: @Model.Formulation</div>
 

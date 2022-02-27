@@ -1,6 +1,6 @@
 # HTTP-5212-Passion-Project-RX-V2
 
-Few highlights of my project using MVC design pattern :
+Few highlights of my project built using MVC design pattern :
 
 1) Uses Models  and database tables created using Entity Relationship Framework
 

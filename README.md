@@ -8,7 +8,7 @@ Few highlights of my project using MVC design pattern :
 
 3) Implemented CRUD for all three Models; Prescription, Drug, PrescriptionDrug
 
-4) PrescriptionDrug Model works as a bridge for Drug and Prescription Entities. It has a composie key (PrescriptionId and DrugID) as its primary key
+4) PrescriptionDrug Model works as a bridge for Drug and Prescription Entities. It uses a composite key (PrescriptionId and DrugID) as its primary key
 
 5) Seperation of Controllers into more specific DataControllers that talks directly to the Models and on top, another layer of Controllers to interact with 
    DataController layer
